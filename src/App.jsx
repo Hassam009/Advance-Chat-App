@@ -9,7 +9,7 @@ const Home=lazy(()=>{
 
 const Login=lazy(()=>{import("./Pages/Login") })
 const Chat=lazy(()=>{import("./Pages/Chat") }) 
-const Group=lazy(()=>{import("./Pages/Group") })   
+const Groups=lazy(()=>{import("./Pages/Groups") })   
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
         <Route path='/' element={Home}></Route>
         <Route path='/Login' element={Login}></Route>
         <Route path='/Chat' element={Chat}></Route>
-        <Route path='/Group' element={Group}></Route>
+        <Route path='/Groups' element={Groups}></Route>
       </Routes>
     </BrowserRouter>
   ) 
