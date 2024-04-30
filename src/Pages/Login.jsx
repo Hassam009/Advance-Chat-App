@@ -6,12 +6,25 @@ const Login = () => {
   const toggleLogin = () => setisLogin(!isLogin);
 
   return (
-    <Container component={"main"} maxWidth="sx">
+    <Container component={"main"} maxWidth="xs" 
+    sx={{ 
+      height: '100vh',
+      display: 'flex', 
+      alignItems: 'center',
+      justifyContent: 'center' }}
+    >
       <Paper elevation={3} sx={{ Padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {isLogin ? (
           <>
             <Typography variant="h5">Login</Typography>
-            <form>
+            <form 
+            style={{
+              fontWeight: 'bold',
+              width: '100%',
+              marginTop: '1rem',
+              textAlign: 'center', // Center the form content
+            }}
+            >
               <TextField
                 required
                 fullWidth
@@ -27,10 +40,10 @@ const Login = () => {
                 margin="normal"
                 variant="outlined"
               />
-              <Button sx={{ marginTop: "1rem" }} variant="contained" color="primary" type="submit">Login</Button>
+              <Button sx={{ marginTop: "1rem", justifyContent: 'center' }} variant="contained" color="primary" type="submit">Login</Button>
               <Typography textAlign="center" margin="1rem"> OR</Typography>
               <Button
-                sx={{ marginTop: "1rem" }}
+                sx={{ marginTop: "1rem", justifyContent: 'center' }}
                 variant="text" color="secondary"
                 onClick={toggleLogin}
               >Sign in</Button>
