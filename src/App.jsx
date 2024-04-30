@@ -1,28 +1,24 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-import { lazy } from 'react'
-
-const Home=lazy(()=>{
-  import("./Pages/Home")
-})
-
-const Login=lazy(()=>{import("./Pages/Login") })
-const Chat=lazy(()=>{import("./Pages/Chat") }) 
-const Groups=lazy(()=>{import("./Pages/Groups") })   
+const Home = lazy(() => import("./Pages/Home"));
+const Login = lazy(() => import("./Pages/Login"));
+const Chat = lazy(() => import("./Pages/Chat"));
+const Groups = lazy(() => import("./Pages/Groups"));
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={Home}></Route>
-        <Route path='/Login' element={Login}></Route>
-        <Route path='/Chat' element={Chat}></Route>
-        <Route path='/Groups' element={Groups}></Route>
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/chat' element={<Chat />} />
+          <Route path='/groups' element={<Groups />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
-  ) 
+  );
 }
 
-export default App
- 
+export default App;
