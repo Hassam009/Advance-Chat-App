@@ -13,7 +13,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.15",
-    "@mui/material": "^5.15.15",
+    "@mui/material": "^5.15.16",
     "6pp": "^1.2.16",
     "chart.js": "^4.4.2",
     "moment": "^2.30.1",
