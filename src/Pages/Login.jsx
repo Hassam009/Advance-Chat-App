@@ -6,30 +6,24 @@ import {
   Typography,
   TextField,
   Stack,
-  Avatar,
   IconButton,
 } from "@mui/material";
-
-import { useInputValidation, useStrongPassword } from "6pp";
+import Avatar from "@mui/material/Avatar";
+import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
 import { validateUsername } from "../Utils/validators";
-
-// You can then use usernameValidator in your component
-
-const handleFileChange = () => {
-  // You can directly access the selected file from event.target.files[0]
-  // Do something with the selected file directly here
-};
-
 import { CameraAlt as CameraAltIcon } from "@mui/icons-material";
 
 const Login = () => {
-  const [isLogin, setisLogin] = useState(true); // Make sure to initialize the state correctly
+  const [isLogin, setisLogin] = useState(true);
+
   const toggleLogin = () => setisLogin((prev) => !prev);
 
   const name = useInputValidation("");
   const bio = useInputValidation("");
   const username = useInputValidation("", validateUsername);
   const password = useStrongPassword("");
+
+  const avatarProps = useFileHandler("single", 2);
 
   return (
     <Container
@@ -40,7 +34,6 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // Fixed padding property
       }}
     >
       <Paper
@@ -60,7 +53,7 @@ const Login = () => {
                 fontWeight: "bold",
                 width: "100%",
                 marginTop: "1rem",
-                textAlign: "center", // Center the form content
+                textAlign: "center",
               }}
             >
               <TextField
@@ -112,12 +105,13 @@ const Login = () => {
                 fontWeight: "bold",
                 width: "100%",
                 marginTop: "1rem",
-                textAlign: "center", // Center the form content
+                textAlign: "center",
               }}
             >
               <Stack position={"relative"} width={"10rem"} margin={"auto"}>
                 <Avatar
                   sx={{ width: "10rem", height: "10rem", objectFit: "contain" }}
+                  src={avatarProps.preview}
                 />
                 <label htmlFor="file-input">
                   <IconButton component="span">
@@ -128,11 +122,16 @@ const Login = () => {
                   id="file-input"
                   type="file"
                   accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={handleFileChange}
+                  style={{
+                    position: "absolute",
+                    width: 0,
+                    height: 0,
+                    overflow: "hidden",
+                    opacity: 0,
+                  }}
+                  onChange={avatarProps.changeHandler}
                 />
               </Stack>
-
               <TextField
                 required
                 fullWidth
@@ -151,19 +150,19 @@ const Login = () => {
                 value={bio.value}
                 onChange={bio.changeHandler}
               />
-
               <TextField
                 required
                 fullWidth
-                label="Username" // Make sure to use "Username" label
+                label="Username"
                 margin="normal"
                 variant="outlined"
                 value={username.value}
                 onChange={username.changeHandler}
               />
               {username.error && (
-                <Typography color="error" 
-                variant="caption">{username.error}</Typography>
+                <Typography color="error" variant="caption">
+                  {username.error}
+                </Typography>
               )}
               <TextField
                 required
@@ -175,9 +174,8 @@ const Login = () => {
                 value={password.value}
                 onChange={password.changeHandler}
               />
-               {password.error && (
-                <Typography color="error">
-                  {password.error}</Typography>
+              {password.error && (
+                <Typography color="error">{password.error}</Typography>
               )}
               <Button
                 sx={{ marginTop: "1rem", justifyContent: "center" }}
