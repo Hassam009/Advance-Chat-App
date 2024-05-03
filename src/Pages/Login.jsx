@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 
 import { useInputValidation } from "6pp";
+import { validateUsername } from "../Utils/validators";
+
+// You can then use usernameValidator in your component
 
 const handleFileChange = () => {
   // You can directly access the selected file from event.target.files[0]
   // Do something with the selected file directly here
 };
-
-
 
 import { CameraAlt as CameraAltIcon } from "@mui/icons-material";
 
@@ -25,11 +26,10 @@ const Login = () => {
   const [isLogin, setisLogin] = useState(true); // Make sure to initialize the state correctly
   const toggleLogin = () => setisLogin((prev) => !prev);
 
-const name=useInputValidation("");
-const bio=useInputValidation("");
-const username=useInputValidation("");
-const password=useInputValidation("");
-
+  const name = useInputValidation("");
+  const bio = useInputValidation("");
+  const username = useInputValidation("", validateUsername);
+  const password = useInputValidation("");
 
   return (
     <Container
@@ -115,7 +115,7 @@ const password=useInputValidation("");
                 textAlign: "center", // Center the form content
               }}
             >
-               <Stack position={"relative"} width={"10rem"} margin={"auto"}>
+              <Stack position={"relative"} width={"10rem"} margin={"auto"}>
                 <Avatar
                   sx={{ width: "10rem", height: "10rem", objectFit: "contain" }}
                 />
@@ -140,7 +140,7 @@ const password=useInputValidation("");
                 margin="normal"
                 variant="outlined"
                 value={name.value}
-                onchange={name.changeHandler}
+                onChange={name.changeHandler}
               />
               <TextField
                 required
@@ -149,17 +149,21 @@ const password=useInputValidation("");
                 margin="normal"
                 variant="outlined"
                 value={bio.value}
-                onchange={bio.changeHandler}
+                onChange={bio.changeHandler}
               />
+
               <TextField
                 required
                 fullWidth
-                label="UserName"
+                label="Username" // Make sure to use "Username" label
                 margin="normal"
                 variant="outlined"
                 value={username.value}
                 onChange={username.changeHandler}
               />
+              {username.error && (
+                <Typography color="error">{username.error}</Typography>
+              )}
               <TextField
                 required
                 fullWidth
@@ -168,7 +172,7 @@ const password=useInputValidation("");
                 margin="normal"
                 variant="outlined"
                 value={password.value}
-                onChange={password.changeHandler} 
+                onChange={password.changeHandler}
               />
               <Button
                 sx={{ marginTop: "1rem", justifyContent: "center" }}
