@@ -10,6 +10,7 @@ import {
   IconButton,
 } from "@mui/material";
 
+import { useInputValidation } from "6pp";
 
 const handleFileChange = () => {
   // You can directly access the selected file from event.target.files[0]
@@ -23,6 +24,12 @@ import { CameraAlt as CameraAltIcon } from "@mui/icons-material";
 const Login = () => {
   const [isLogin, setisLogin] = useState(true); // Make sure to initialize the state correctly
   const toggleLogin = () => setisLogin((prev) => !prev);
+
+const name=useInputValidation("");
+const bio=useInputValidation("");
+const username=useInputValidation("");
+const password=useInputValidation("");
+
 
   return (
     <Container
@@ -62,6 +69,8 @@ const Login = () => {
                 label="UserName"
                 margin="normal"
                 variant="outlined"
+                value={username.value}
+                onChange={username.changeHandler}
               />
               <TextField
                 required
@@ -70,6 +79,8 @@ const Login = () => {
                 type="password"
                 margin="normal"
                 variant="outlined"
+                value={password.value}
+                onChange={password.changeHandler}
               />
               <Button
                 sx={{ marginTop: "1rem", justifyContent: "center" }}
@@ -128,6 +139,8 @@ const Login = () => {
                 label=" Name"
                 margin="normal"
                 variant="outlined"
+                value={name.value}
+                onchange={name.changeHandler}
               />
               <TextField
                 required
@@ -135,6 +148,8 @@ const Login = () => {
                 label=" Bio"
                 margin="normal"
                 variant="outlined"
+                value={bio.value}
+                onchange={bio.changeHandler}
               />
               <TextField
                 required
@@ -142,6 +157,8 @@ const Login = () => {
                 label="UserName"
                 margin="normal"
                 variant="outlined"
+                value={username.value}
+                onChange={username.changeHandler}
               />
               <TextField
                 required
@@ -150,6 +167,8 @@ const Login = () => {
                 type="password"
                 margin="normal"
                 variant="outlined"
+                value={password.value}
+                onChange={password.changeHandler} 
               />
               <Button
                 sx={{ marginTop: "1rem", justifyContent: "center" }}
