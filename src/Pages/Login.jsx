@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "@mui/material";
 
-import { useInputValidation } from "6pp";
+import { useInputValidation, useStrongPassword } from "6pp";
 import { validateUsername } from "../Utils/validators";
 
 // You can then use usernameValidator in your component
@@ -29,7 +29,7 @@ const Login = () => {
   const name = useInputValidation("");
   const bio = useInputValidation("");
   const username = useInputValidation("", validateUsername);
-  const password = useInputValidation("");
+  const password = useStrongPassword("");
 
   return (
     <Container
@@ -162,7 +162,8 @@ const Login = () => {
                 onChange={username.changeHandler}
               />
               {username.error && (
-                <Typography color="error">{username.error}</Typography>
+                <Typography color="error" 
+                variant="caption">{username.error}</Typography>
               )}
               <TextField
                 required
@@ -174,6 +175,10 @@ const Login = () => {
                 value={password.value}
                 onChange={password.changeHandler}
               />
+               {password.error && (
+                <Typography color="error">
+                  {password.error}</Typography>
+              )}
               <Button
                 sx={{ marginTop: "1rem", justifyContent: "center" }}
                 variant="contained"
